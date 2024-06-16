@@ -1,4 +1,5 @@
-﻿using SOLID.LiskovSubstitutionPrinciple;
+﻿using SOLID.InterfaceSegregationPrinciple;
+using SOLID.LiskovSubstitutionPrinciple;
 using SOLID.OpenClosedPrinciple;
 using SOLID.OpenClosedPrinciple.Enums;
 using SOLID.OpenClosedPrinciple.Specifications;
@@ -13,6 +14,9 @@ InitOCP();
 
 System.Console.WriteLine("\nLISKOV SUBSTITUTION PRINCIPLE");
 InitLiskov();
+
+System.Console.WriteLine("\nINTERFACE SEGREGATION PRINCIPLE");
+InitISP();
 
 
 static void InitSRP()
@@ -31,7 +35,6 @@ static void InitSRP()
     persist.SaveToFile(journals, filePath);
 }
 
-
 static void InitOCP()
 {
     // The Open Closed Principle states that the classes should be open for extension but closed for modification
@@ -49,7 +52,6 @@ static void InitOCP()
 
 }
 
-
 static void InitLiskov()
 {
     // Liskov Substitution Principle states that any code written to work with the base class
@@ -60,6 +62,19 @@ static void InitLiskov()
     Rectangle square = new Square();
     square.Width = 5;
     System.Console.WriteLine(square.GetArea());
+}
+
+static void InitISP()
+{
+    // The Interface Segregation Principle states that clients should not be forced to implement an interface they do not use
+
+    var multifunctionPrinter = new MultifunctionPrinter();
+    multifunctionPrinter.Print(new Document("Fancy machine printing Hello World"));
+    multifunctionPrinter.Scan(new Document("Fancy machine scanning Hello World"));
+    multifunctionPrinter.Fax(new Document("Fancy machine faxing Hello World"));
+
+    var simplePrinter = new SimplePrinter();
+    simplePrinter.Print(new Document("simple machine printing Hello World"));
 }
 
 static void Print(IEnumerable<string> items)
